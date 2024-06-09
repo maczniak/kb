@@ -1,0 +1,10 @@
+\begin{frame}[fragile]{Transaction \textnormal{\texttt{data}} field}
+  \begin{itemize}
+    \item \texttt{data} field may contain arbitrary data such as constitution and love letters. When you call smart contracts, \texttt{data} decides a function with parameters and follows an ABI convention: 4 bytes selector + padded 32 bytes parameters.
+    \item If you send 326.183863 USDT to 0x0437da\ldots 88,
+    \item \texttt{\scriptsize \colorbox{yellow!10}{0xa9059cbb}} = first 4 bytes of \texttt{\scriptsize keccak("transfer(address,uint256)")}
+    \item \texttt{\tiny \colorbox{yellow!10}{0000000000000000000000000437dab2d4801d1e9100adebb39e95e8f9973288}} recipient address
+    \item \texttt{\tiny \colorbox{yellow!10}{0000000000000000000000000000000000000000000000000000000013712bb7}} =326183863
+    \item USDT's \texttt{decimals} is 6. Internal representation of 326.183863 USDT is 326\undertext{183863}{6 digits}. Almost all ERC20s' \texttt{decimals} is 18 like ethers. 1 UNI becomes 1\undertext{000000000000000000}{18 zeros}.
+  \end{itemize}
+\end{frame}

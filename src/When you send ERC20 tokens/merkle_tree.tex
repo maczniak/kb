@@ -1,0 +1,35 @@
+\begin{frame}[fragile]{Merkle Tree}
+  \begin{tikzpicture}[scale=0.7,every node/.style={transform shape}]
+
+\node[draw=none] at (0em, 0ex) {
+\begin{tikzpicture}
+\tikzset{every tree node/.style={align=center}}
+\Tree [
+  .$root=hash(hash(hash(A\|B)\|hash(C\|D))\|hash(hash(E\|F)\|hash(G\|H)))$ [
+    .\textcolor{blue!50}{$hash(hash(A\|B)\|hash(C\|D))$} [
+      .$hash(A\|B)$ $A$ $B$
+    ][
+      .$hash(C\|D)$ $C$ $D$
+    ]
+  ][
+    .$hash(hash(E\|F)\|hash(G\|H))$ [
+      .$hash(E\|F)$ \textcolor{blue!50}{$E$} \textcolor{red!50}{$F$}
+    ][
+      .\textcolor{blue!50}{$hash(G\|H)$} $G$ $H$
+    ]
+  ]
+]
+\end{tikzpicture}};
+
+\node[align=left,anchor=north west] at (-20em,-15ex) {\textbf{Integrity}\\
+root is changed if any leaf is changed.\\
+You can compare roots only.};
+
+\node[align=left,anchor=north west] at (-20em,-25ex) {\textbf{Inclusion Proof} (Merkle Proof)\\
+If Alice knows a root already, you can convince her of the existence of any leaf, \textcolor{red!50}{$F$}.\\
+You send her a Merkle proof: \textcolor{red!50}{$F$}, \textcolor{blue!50}{$E$} (left), \textcolor{blue!50}{$hash(G\|H)$} (right), \textcolor{blue!50}{$hash(hash(A\|B)\|hash(C\|D))$} (left).\\
+Alice may compute a root with a Merkle proof only, and compare two roots.\\
+You cannot fool her with nonexistent leaves.};
+
+  \end{tikzpicture}
+\end{frame}

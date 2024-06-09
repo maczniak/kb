@@ -1,0 +1,77 @@
+\begin{frame}[fragile]{EIP-1559 gas fee}
+
+\begin{tikzpicture}[scale=1.0,every node/.style={transform shape}]
+
+% eip-1559 gas price chart
+\draw[-latex] (0pt,0pt) -- (100pt,0pt); % x axis
+\draw[-latex] (0pt,0pt) -- (0pt,60pt); % y axis
+\draw (0pt,0pt) -- (70pt,70pt); % diagonal line
+\fill[draw,pattern=north west lines] (0pt,0pt) -- (50pt,50pt) -- (35pt,50pt) -- (0pt,15pt) -- cycle;
+\draw (-3pt,15pt) -- (0pt,15pt);
+\draw (-3pt,50pt) -- (80pt,50pt);
+\draw[dotted] (50pt,0pt) -- (50pt,50pt);
+\draw[ultra thick] (0pt,15pt) -- (35pt,50pt) -- (50pt,50pt);
+
+\node at (90pt,-5pt) {{\tiny baseFee}};
+\node[rotate=90] at (-6pt,50pt) {{\tiny maxFee}};
+\node[rotate=90] at (-6pt,15pt) {{\tiny maxTip}};
+\node (T1) at (15pt,70pt) {{\scriptsize tip for miners}};
+\node (A1) at (45pt,85pt) {{\scriptsize actual gas price that a user pays}};
+\node at (35pt,15pt) {{\scriptsize burned}};
+\node at (80pt,30pt) {{\scriptsize cannot be mined}};
+
+\draw (T1) -- (25pt,25pt+7.5pt);
+\draw[thick] (A1) -- (50pt-7.5pt,50pt);
+
+% eip-1559 tx fee chart
+\draw[-latex] (130pt,0pt) -- (215pt,0pt); % x axis
+\draw[-latex] (130pt,0pt) -- (130pt,60pt); % y axis
+\draw (130pt-3pt,50pt) -- (205pt,50pt) -- (205pt,0pt-3pt);
+\draw (130pt-3pt,25pt) -- (180pt,25pt) -- (180pt,0pt-3pt);
+\fill[draw,pattern=north west lines] (130pt,25pt) -- (130pt,40pt) -- (180pt,40pt) -- (180pt,25pt) -- cycle;
+\draw[ultra thick] (130pt,40pt) -- (180pt,40pt) -- (180pt,0pt);
+%\draw (130pt-5pt,40pt) -- (130pt,40pt);
+\node at (180pt,-5pt) {{\tiny usedGas}};
+\node at (205pt,-5pt) {{\tiny gasLimit}};
+\node[rotate=90] at (130pt-6pt,50pt) {{\tiny maxFee}};
+\node[rotate=90] at (130pt-6pt,25pt) {{\tiny baseFee}};
+\node (T2) at (130pt+15pt,70pt) {{\scriptsize tip for miners}};
+\node (A2) at (130pt+45pt,85pt) {{\scriptsize actual tx fee = amount $\times$ price}};
+\node at (155pt,25/2pt) {{\scriptsize burned fee}};
+\node at (180pt,45pt) {{\tiny refund to user}};
+\draw (T2) -- (130pt+25pt,25pt+7.5pt);
+\draw[thick] (A2) -- (130pt+50pt-7.5pt,40pt);
+\draw[decorate,decoration={brace,amplitude=5pt}] (180pt+1.5pt,40pt) -- (180pt+1.5pt,25pt);
+\node[rotate=45] at (180pt+10pt,65/2pt-2pt) {{\tiny tip}};
+
+% pre-1559 tx fee chart
+\def\poffset{-90pt}
+\draw[-latex] (130pt,\poffset) -- (215pt,\poffset); % x axis
+\draw[-latex] (130pt,\poffset) -- (130pt,\poffset+60pt); % y axis
+\draw (130pt-3pt,\poffset+50pt) -- (205pt,\poffset+50pt) -- (205pt,\poffset-3pt);
+\fill[draw,pattern=north west lines] (130pt,\poffset) -- (130pt,\poffset+50pt) -- (180pt,\poffset+50pt) -- (180pt,\poffset) -- cycle;
+\draw[ultra thick] (130pt,\poffset+50pt) -- (180pt,\poffset+50pt) -- (180pt,\poffset+0pt);
+\node at (180pt,\poffset-5pt) {{\tiny usedGas}};
+\node at (205pt,\poffset-5pt) {{\tiny gasLimit}};
+\node[rotate=90] at (130pt-6pt,\poffset+50pt) {{\tiny fee}};
+\node[rotate=90] at (192.5pt,\poffset+50/2pt) {{\tiny refund to user}};
+\node (A3) at (130pt+55pt,\poffset+65pt) {{\scriptsize pre-EIP-1559 tx fee (no refunds)}};
+\draw[thick] (A3) -- (130pt+50pt-7.5pt,\poffset+50pt);
+
+\node[align=left,anchor=north west,font=\scriptsize] at (-40pt,-20pt) {
+\texttt{baseFee} is determined from used gas ratio\\
+each block. If maximum block gas limit is\\
+used, \texttt{baseFee} increases by +12.5\%.\\
+If half of gas limit is used, it is not changed.\\
+If no gas is used, it decreases by 12.5\%.
+};
+
+\node[align=left,anchor=north west,font=\scriptsize] at (-40pt,-70pt) {
+The maximum block gas limit is decided by\\
+miners within $\pm\frac{1}{1024}$ (about 0.1\%) difference\\
+from the previous block.
+};
+
+  \end{tikzpicture}
+
+\end{frame}

@@ -1,0 +1,125 @@
+\begin{frame}[fragile]{Account}
+  \begin{center}\makebox[0pt]{\scalebox{1.0}{% centering wide picture
+  \begin{tikzpicture}[scale=0.7,every node/.style={transform shape}]
+    \tikzstyle{field}=[minimum width=6em,minimum height=2.8ex,draw]
+    \tikzstyle{desc}=[right=+4em]
+    \node[field] at (0,0) {balance};
+      \node[desc] at (0,0) {ethers that this account holds (unit wei)};
+    \node[field] at (0,-4ex) {storageRoot};
+      \node[desc] at (0,-4ex) {root of storage tree};
+    \node[field] at (0,-8ex) {nonce};
+      \node[desc] at (0,-8ex) {the number of txs that this account has sent};
+    \node[field] at (0,-12ex) {codeHash};
+      \node[desc] at (0,-12ex) {hash of smart contract code. empty in the case of user account (EOA)};
+
+\node at (5em, -45ex) {\ldots\ storage values \ldots};
+\node[draw=none] at (5em, -32ex) {
+\begin{tikzpicture}
+\tikzset{every tree node/.style={align=center}}
+\Tree [
+  .storageRoot
+    \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+      \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+        \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+        \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+      ]
+      \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+        \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+        \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+      ]
+    ]
+    \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+      \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+        \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+        \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+      ]
+      \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+        \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+        \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+      ]
+    ]
+]
+\end{tikzpicture}};
+
+\node[draw] at (30em, -17.5ex) {tree of trees};
+\node at (30em, -45ex) {\ldots\ accounts (including storageRoot) \ldots};
+\node[draw=none] at (30em, -32ex) {
+\begin{tikzpicture}
+\tikzset{every tree node/.style={align=center}}
+\Tree [
+  .{\colorbox{yellow!20}{stateRoot in block header}}
+    \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+      \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+        \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+        \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+      ]
+      \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+        \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+        \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+      ]
+    ]
+    \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+      \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+        \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+        \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+      ]
+      \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+        \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+        \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+      ]
+    ]
+]
+\end{tikzpicture}};
+
+\draw[-stealth] plot[smooth, tension=0.5] coordinates { (5em, -19ex) (8em,-15ex) (14em,-17ex) (19em,-48ex) (21em, -45ex) };
+  \end{tikzpicture}
+}}\end{center}
+\end{frame}

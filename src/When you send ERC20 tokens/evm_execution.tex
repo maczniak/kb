@@ -1,0 +1,114 @@
+\begin{frame}[fragile]{EVM Execution}
+  \begin{center}\makebox[0pt]{\scalebox{1.0}{% centering wide picture
+  \begin{tikzpicture}[scale=0.7,every node/.style={transform shape}]
+\node[align=left] at (0em,-0ex) {First, jump to \texttt{transfer} function by a selector,\\
+\texttt{\ldots}\\
+\texttt{dup1}\\
+\texttt{0x95d89b41}\\
+\texttt{eq}\\
+\texttt{tag\_22}\\
+\texttt{jumpi}\\
+\textcolor{red!50}{\texttt{dup1}}\\
+\textcolor{red!50}{\texttt{0xa9059cbb}}\\
+\textcolor{red!50}{\texttt{eq}}\\
+\textcolor{red!50}{\texttt{tag\_23}}\\
+\textcolor{red!50}{\texttt{jumpi}}\\
+\texttt{dup1}\\
+\texttt{0xc0324c77}\\
+\texttt{eq}\\
+\texttt{\ldots}};
+
+\node[align=left][scale=0.6] at (17em, 3ex) {
+\texttt{address public owner;} // at storage 0x00\\
+\texttt{bool public paused;} // at 0x00 next to owner\\
+\texttt{uint public \_totalSupply;} // at 0x01\\
+\texttt{mapping(address => uint) public balances;} // at $\textcolor{blue}{keccak}(\textcolor{green}{address}\|\textcolor{orange}{2})$\\
+\texttt{uint public basisPointsRate;} // at 0x03\\
+\texttt{uint public maximumFee;} // at 0x04\\
+\texttt{mapping (address$_1$ => mapping (address$_2$ => uint)) public allowed;} // at $keccak(address_2\|keccak(address_1\|5))$\\
+\texttt{mapping (address => bool) public isBlackListed;} at $keccak(address\|6)$\\
+\texttt{string public name;} // at 0x07\\
+\texttt{string public symbol;} // at 0x08\\
+\texttt{uint public decimals;} // at 0x09\\
+\texttt{address public upgradedAddress;} // at 0x0a\\
+\texttt{bool public deprecated;} // at 0x0a next to upgradedAddress\\
+%\texttt{balances}, is stored at $\textcolor{blue}{keccak}(\textcolor{green}{key}\|\textcolor{orange}{2})$ in storage.\\
+\texttt{\ldots}\\
+\texttt{balances[msg.sender] = \textcolor{red!50}{balances[msg.sender]}.sub(\_value);}\\
+\texttt{balances[\_to] = balances[\_to].add(sendAmount);}\\
+\texttt{\ldots}};
+
+\node[align=left][scale=0.6] at (8em, -25ex) {\texttt{\ldots}\\
+\texttt{sub(exp(0x2, 0xa0), 0x1)}\\
+\texttt{\textcolor{green}{caller}} /* = msg.sender */\\
+\texttt{and}\\
+\texttt{0x0}\\
+\texttt{swap1}\\
+\texttt{dup2}\\
+\texttt{mstore}\\
+\texttt{\textcolor{orange}{0x2}}\\
+\texttt{0x20}\\
+\texttt{mstore}\\
+\texttt{0x40}\\
+\texttt{swap1}\\
+\texttt{\textcolor{blue}{keccak256}}\\
+\texttt{sload} /* storage load */\\
+\texttt{\ldots}};
+\draw[-stealth] (13em, -7.5ex) -- (8em, -13ex);
+
+\node[align=center,draw] at (26em, -6ex) {storage in tree style\\(not consecutive space)};
+\node[draw=none] at (26em, -22ex) {
+\begin{tikzpicture}
+\tikzset{every tree node/.style={align=center}}
+\Tree [
+  .storageRoot
+    \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+      \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+        \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+        \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+      ]
+      \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+        \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+        \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+      ]
+    ]
+    \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+      \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+        \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+        \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+      ]
+      \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+        \edge node[auto=right]{\footnotesize{0}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+        \edge node[auto=left]{\footnotesize{1}}; [ .\node{};
+          \edge node[auto=right]{\footnotesize{0}}; \node{};
+          \edge node[auto=left]{\footnotesize{1}}; \node{};
+        ]
+      ]
+    ]
+]
+\end{tikzpicture}};
+
+  \end{tikzpicture}
+}}\end{center}
+\end{frame}

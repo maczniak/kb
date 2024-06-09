@@ -1,0 +1,101 @@
+\documentclass[10pt]{beamer}
+
+% TODO:
+%   kademlia
+
+% changelog
+% 20220519 - closing.tex
+%              we -> Ethereum
+% 20220503 - eip_1559_gas_fee.tex
+%              eip-1559 tx fee chart & pre-1559 tx fee chart
+%            receipt.tex
+%              Receipts are not block data. Only Merkle tree root of receipts
+%              (\texttt{receiptRoot}) is stored in block header.
+
+% example https://etherscan.io/tx/0x49f98d79de29dfdf7b78969cf32f4cfdce0887dbdbad691db0e94ce3bf29487a
+% eip-1559 tx https://cryptoturtles.substack.com/p/-20-2021-7
+% famous patricia tree guide https://i.stack.imgur.com/YZGxe.png
+
+\usetheme[progressbar=frametitle,numbering=none]{metropolis}
+\usepackage{appendixnumberbeamer}
+\setmonofont{FiraMono-Regular.otf} % upright typewriter
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+
+\usepackage{xspace}
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+%\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\usepackage{tikz}
+\usetikzlibrary{graphs,graphs.standard,quotes} %graphdrawing
+%\usegdlibrary{trees}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta,arrows}
+\usepackage{tikz-qtree} % https://ctan.org/pkg/tikz-qtree
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{patterns}
+
+\newcommand{\undertext}[2] {$\underbrace{\textnormal{#1}}_{\textnormal{#2}}$}
+\definecolor{indigo}{rgb}{0.29, 0.0, 0.51}
+
+%\hypersetup{
+%    colorlinks=true,
+%    urlcolor=blue,
+    %pdftitle={Overleaf Example},
+    %pdfpagemode=FullScreen,
+%    }
+
+\title{When you send ERC20 tokens}
+\subtitle{in-house seminar}
+% \date{\today}
+\date{2022-05-03}
+\author{Jeongho Jeon}
+\institute{DSRV}
+\titlegraphic{\hfill\includegraphics[height=3.0ex]{dsrv_logo_master_black}}
+
+\begin{document}
+
+\maketitle
+
+\input{metamask_wallet_n_uniswap}
+
+\input{transaction}
+
+\input{transaction_data_field}
+
+\input{transaction_serialization_by_rlp}
+
+\input{p2p_protocol_devp2p}
+
+\input{eip_1559_gas_fee}
+
+\input{mempool}
+
+\input{metamask_speed_up_n_cancel}
+
+\input{evm_execution}
+
+\input{merkle_tree}
+
+\input{receipt}
+
+\input{bloom_filter}
+
+\input{account}
+
+\input{block_header}
+
+\input{archive_node}
+
+\input{patricia_tree}
+
+\input{disk}
+
+\input{closing}
+
+\end{document}

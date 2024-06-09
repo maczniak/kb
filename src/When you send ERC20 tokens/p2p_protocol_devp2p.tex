@@ -1,0 +1,29 @@
+\begin{frame}[fragile]{p2p protocol, devp2p}
+\begin{center}
+  \begin{tikzpicture}[scale=0.9,every node/.style={transform shape}]
+
+\def\seqhalfwidth{14em}
+\def\seqsep{3ex}
+\def\seqheight{\seqsep*7}
+\def\tclr{black!50}
+
+\node at (-\seqhalfwidth,1.2ex) {node};
+\node at (\seqhalfwidth,1.2ex) {node};
+
+\draw (-\seqhalfwidth,0) -- (-\seqhalfwidth,-\seqheight) (\seqhalfwidth,0) -- (\seqhalfwidth,-\seqheight);
+\draw[-Stealth] (-\seqhalfwidth,-\seqsep*1) -- node[midway,above] {Transactions \textcolor{\tclr}{\textit{txs}}} (\seqhalfwidth,-\seqsep*1);
+\draw[draw=none] (-\seqhalfwidth,-\seqsep*2.5) -- node[midway,above] {or} (\seqhalfwidth,-\seqsep*2.5);
+\draw[-Stealth] (-\seqhalfwidth,-\seqsep*4) -- node[midway,above] {NewPooledTransactionHashes \textcolor{\tclr}{\textit{txhashes}}} (\seqhalfwidth,-\seqsep*4);
+\draw[Stealth-] (-\seqhalfwidth,-\seqsep*5) -- node[midway,above] {GetPooledTransactions \textcolor{\tclr}{\textit{txhashes}}} (\seqhalfwidth,-\seqsep*5);
+\draw[-Stealth] (-\seqhalfwidth,-\seqsep*6) -- node[midway,above] {PooledTransactions \textcolor{\tclr}{\textit{txs}}} (\seqhalfwidth,-\seqsep*6);
+
+\draw (-\seqhalfwidth,-\seqheight-\seqsep) -- (-\seqhalfwidth,-\seqheight*2-\seqsep) (\seqhalfwidth,-\seqheight-\seqsep) -- (\seqhalfwidth,-\seqheight*2-\seqsep);
+\draw[-Stealth] (-\seqhalfwidth,-\seqheight-\seqsep-\seqsep*1) -- node[midway,above] {NewBlock \textcolor{\tclr}{\textit{blocks}}} (\seqhalfwidth,-\seqheight-\seqsep-\seqsep*1);
+\draw[draw=none] (-\seqhalfwidth,-\seqheight-\seqsep-\seqsep*2.5) -- node[midway,above] {or} (\seqhalfwidth,-\seqheight-\seqsep-\seqsep*2.5);
+\draw[-Stealth] (-\seqhalfwidth,-\seqheight-\seqsep-\seqsep*4) -- node[midway,above] {NewBlockHashes \textcolor{\tclr}{\textit{blkhashes}}} (\seqhalfwidth,-\seqheight-\seqsep-\seqsep*4);
+\draw[Stealth-] (-\seqhalfwidth,-\seqheight-\seqsep-\seqsep*5) -- node[midway,above] {GetBlockHeaders \textcolor{\tclr}{\textit{blkhashes}} / GetBlockBodies \textcolor{\tclr}{\textit{blkhashes}}} (\seqhalfwidth,-\seqheight-\seqsep-\seqsep*5);
+\draw[-Stealth] (-\seqhalfwidth,-\seqheight-\seqsep-\seqsep*6) -- node[midway,above] {BlockHeaders \textcolor{\tclr}{\textit{blkheaders}} / BlockBodies \textcolor{\tclr}{\textit{blkbodies}}} (\seqhalfwidth,-\seqheight-\seqsep-\seqsep*6);
+
+  \end{tikzpicture}
+\end{center}
+\end{frame}

@@ -1,0 +1,37 @@
+\begin{frame}[fragile]{Transaction (tx)}
+\begin{center}\makebox[0pt]{\scalebox{1.0}{% centering wide picture
+  \begin{tikzpicture}[scale=0.8,every node/.style={transform shape}]
+    \tikzstyle{field}=[minimum width=6em,minimum height=2.8ex,draw]
+    \tikzstyle{desc}=[right=+4em]
+    \node[field] at (0,0) {type 0x02};
+      \node[desc] at (0,0) {0x02 = EIP-1559 tx};
+    \node[field] at (0,-4ex) (chainId) {chainId};
+      \node[desc] at (0,-4ex) {0x01 = mainnet};
+    \node[field] at (0,-8ex) {nonce};
+      \node[desc] at (0,-8ex) {{\footnotesize the number of txs that this account has sent. No gap between serial numbers}};
+    \node[field] at (0,-12ex) {maxPriority};
+      \node[desc] at (0,-12ex) {maximum gas price tip that tx is willing to pay (for miners, unit wei)};
+    \node[field] at (0,-16ex) {maxFee};
+      \node[desc] at (0,-16ex) {maximum gas price (tip included, unit wei)};
+    \node[field] at (0,-20ex) {gasLimit};
+      \node[desc] at (0,-20ex) {maximum gas amount that tx can use};
+    \node[field] at (0,-24ex) {to};
+      \node[desc] at (0,-24ex) {token contract address. not token receipient. empty when creating contracts};
+    \node[field] at (0,-28ex) {value};
+      \node[desc] at (0,-28ex) {transferred ether (unit wei = $10^{-18}$ ether). zero (empty $\varnothing$) for ERC20 transfers};
+    \node[field] at (0,-32ex) {data};
+      \node[desc] at (0,-32ex) {smart contract function selector. see next slide};
+    \node[field] at (0,-36ex) {accessList};
+      \node[desc] at (0,-36ex) {for future optimizations};
+    \node[field] at (0,-40ex) {parity};
+      \node[desc] at (0,-40ex) {for public key recovery from ECDSA signature, $r^{-1}(sR-zG)$};
+    \node[field] at (0,-44ex) {r};
+      \node[desc] at (0,-44ex) {ECDSA signature, $kG$};
+    \node[field] at (0,-48ex) {s};
+      \node[desc] at (0,-48ex) {ECDSA signature, $k^{-1}(z + r d_A)$};
+      
+    \draw[gray] (-3.3em,-2ex) rectangle (3.3em,-50ex);
+    \node[rotate=90,gray] at (3.7em, -4ex) {{\scriptsize Array}};
+  \end{tikzpicture}
+}}\end{center}
+\end{frame}
